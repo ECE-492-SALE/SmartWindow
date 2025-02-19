@@ -1,3 +1,6 @@
+// Adapted from:
+// https://github.com/daniloc/PicoW_HomeAssistant_Starter/tree/main/src
+
 #include "HAIntegration.h"
 #include "Credentials.h"
 
@@ -12,6 +15,9 @@
 WiFiClient client;
 HADevice device;
 HAMqtt mqtt(client, device);
+// TO DO: initialize an instance of a HA device-type
+// HASwitch is an example of a HA device-type. You may need to initialize an instance of a different class for your device.
+// See .pio\libdeps\pico\home-assistant-integration\src\device-types
 HASwitch led("led");
 
 void HAIntegration::configure() {
@@ -28,7 +34,7 @@ void HAIntegration::configure() {
     device.setUniqueId(mac, sizeof(mac));
 
     //Device metadata:
-
+    // TO DO: Change name to match your device
     device.setName("Pico W HA Starter");
     device.setSoftwareVersion("0.1");
 
