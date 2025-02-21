@@ -1,6 +1,6 @@
 # Raspberry Pi Pico W Home Assistant Starter Project Using `arduino-pico`
 
-Fill out `src/Credentials.h`, upload to your Pico W, then you'll have a working integration that allows you to toggle the Pico W's board LED from the Home Assistant dashboard. From this starter you'll have a solid foundation to build your own custom device in a private, local Intranet of Things.
+Fill out `src/Credentials.h` following the guidelines in "Hub to Pico Connection Notes", upload to your Pico W, then you'll have a working integration that allows you to toggle the Pico W's board LED from the Home Assistant dashboard. From this starter you'll have a solid foundation to build your own custom device in a private, local Intranet of Things.
 
 ![image](https://user-images.githubusercontent.com/213358/187091688-881e81df-606b-4417-91f5-e10f0567d1cd.gif)
 
