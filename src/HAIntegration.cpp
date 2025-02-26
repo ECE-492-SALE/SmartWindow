@@ -11,6 +11,8 @@
 //  https://github.com/dawidchyrzynski/arduino-home-assistant/blob/main/examples/nano33iot/nano33iot.ino
 
 #define LED_PIN     LED_BUILTIN
+#define DIRECTION          22
+#define POWER              21
 
 WiFiClient client;
 HADevice device;
@@ -26,6 +28,15 @@ void HAIntegration::configure() {
 
     pinMode(LED_PIN, OUTPUT);
     digitalWrite(LED_PIN, LOW);    
+    
+    //Prepare GPIO pins:
+
+    pinMode(DIRECTION, OUTPUT);
+    digitalWrite(DIRECTION, LOW);  
+
+    pinMode(POWER, OUTPUT);
+    digitalWrite(POWER, LOW);  
+
     
     //Set device ID as MAC address
 
