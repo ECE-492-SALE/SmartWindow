@@ -1,12 +1,12 @@
 #ifndef SRC_CREDENTIALS
 #define SRC_CREDENTIALS
 
-#define WIFI_SSID ""
-#define WIFI_PASSWORD ""
+#define WIFI_SSID "test123"
+#define WIFI_PASSWORD "calumrocks"
 
-#define MQTT_LOGIN ""
-#define MQTT_PASSWORD ""
+#define MQTT_LOGIN "pritest"
+#define MQTT_PASSWORD "NoBusPlease"
 
-#define MQTT_BROKER IPAddress(192,168,0,42)
+#define MQTT_BROKER IPAddress(10,20,0,69)
 
 #endif // SRC_CREDENTIALS
