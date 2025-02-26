@@ -5,5 +5,12 @@
 
 #include <ArduinoHA.h>
 
+void PowerControl() {
+  
+}
+
+void DirectionControl() {
+  
+}
 
 #endif // SRC_FUNCTIONS
