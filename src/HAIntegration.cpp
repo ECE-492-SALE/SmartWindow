@@ -46,7 +46,7 @@ void HAIntegration::configure() {
 
     //Device metadata:
     // TO DO: Change name to match your device
-    device.setName("Pico W HA Starter");
+    device.setName("Pico Window");
     device.setSoftwareVersion("0.1");
 
     // handle switch state
