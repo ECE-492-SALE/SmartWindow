@@ -117,6 +117,7 @@ void HAIntegration::onButtonCommand(HAButton* sender) {
 
 // //future use 
 
+// TODO: make stopped state work properly with HA
 void HAIntegration::onCoverCommand(HACover::CoverCommand cmd, HACover* sender) {
     if (cmd == HACover::CommandOpen) {
         Serial.println("Command: ON");
