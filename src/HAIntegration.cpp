@@ -29,7 +29,7 @@ HASwitch direction("Direction");
 HAButton power("Power");
 
 HACover cover("Cover", HACover::PositionFeature);
-HANumber number("Calibrate Position");
+HANumber number("CalibratePosition");
 
 
 
@@ -77,7 +77,10 @@ void HAIntegration::configure() {
     cover.setName("My cover"); // optional
 
     number.onCommand(onNumberCommand);
-    number.setName("Number");
+    number.setName("Calibrate Position");
+    number.setMin(0);
+    number.setMax(100);
+    number.setMode(HANumber::ModeBox);
 
 
     Serial.print("Connecting to MQTT\n");
@@ -120,30 +123,6 @@ void HAIntegration::onButtonCommand(HAButton* sender) {
 // cover.setName("My cover"); // optional
 
 // //future use 
-
-// TODO: make stopped state work properly with HA
-// void HAIntegration::onCoverCommand(HACover::CoverCommand cmd, HACover* sender) {
-//     if (cmd == HACover::CommandOpen) {
-//         Serial.println("Command: ON");
-//         sender->setState(HACover::StateOpening); // report state back to the HA
-//     } else if (cmd == HACover::CommandClose) {
-//         Serial.println("Command: OFF");
-//         digitalWrite(LED_PIN, LOW);
-//         sender->setState(HACover::StateClosing); // report state back to the HA
-//     } else if (cmd == HACover::CommandStop) {
-//         Serial.println("Command: Stop");
-//         sender->setState(HACover::StateStopped); // report state back to the HA
-//     }
-
-//     // Available states:
-//     // HACover::StateClosed
-//     // HACover::StateClosing
-//     // HACover::StateOpen
-//     // HACover::StateOpening
-//     // HACover::StateStopped
-
-//     // You can also report position using setPosition() method
-// }
 
 void HAIntegration::onCoverCommand(HACover::CoverCommand cmd, HACover* sender) {
     // Log the received command
@@ -203,7 +182,7 @@ void HAIntegration::onNumberCommand(HANumeric number, HANumber* sender)
         // the reset command was send by Home Assistant
     } else {
         // you can do whatever you want with the number as follows:
-        uint16_t numberUInt8 = number.toUInt8(); //(0-255)
+        float numberFloat = number.toFloat(); 
     }
 
     sender->setState(number); // report the selected option back to the HA panel
