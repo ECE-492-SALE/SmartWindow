@@ -134,20 +134,23 @@ void HAIntegration::onCoverCommand(HACover::CoverCommand cmd, HACover* sender) {
         case HACover::CommandOpen:
             commandStr = "Open";
             newState = HACover::StateOpening;
-            // TODO: Add hardware logic for opening (e.g., motor control)
+            
+            digitalWrite(DIRECTION, HIGH);
+            digitalWrite(POWER, HIGH);
             break;
 
         case HACover::CommandClose:
             commandStr = "Close";
             newState = HACover::StateClosing;
-            // Example: turn off LED or control GPIO
-            digitalWrite(LED_PIN, LOW);
+            digitalWrite(DIRECTION, LOW);
+            digitalWrite(POWER, HIGH);
             break;
 
         case HACover::CommandStop:
             commandStr = "Stop";
             newState = HACover::StateStopped;
-            // TODO: Add hardware logic to stop movement
+            digitalWrite(POWER, LOW);
+
             break;
 
         default:
@@ -164,16 +167,6 @@ void HAIntegration::onCoverCommand(HACover::CoverCommand cmd, HACover* sender) {
 
     sender->setPosition(50); // CALUM: hopes this will fix the issue with stop only allowing open or close
 }
-
-
-
-
-
-
-
-
-
-
 
 
 void HAIntegration::onNumberCommand(HANumeric number, HANumber* sender)
