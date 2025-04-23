@@ -11,7 +11,7 @@
 //  https://github.com/dawidchyrzynski/arduino-home-assistant/blob/main/examples/nano33iot/nano33iot.ino
 
 #define LED_PIN     LED_BUILTIN
-#define DIRECTION          22
+#define DIRECTION          22 //Physical is 27 and 29
 #define POWER              21
 
 #define INPUT1_PIN  10
@@ -114,15 +114,7 @@ void HAIntegration::onButtonCommand(HAButton* sender) {
     
 }
 
-
-
 //Cover
-
-//setup
-// cover.onCommand(onCoverCommand);
-// cover.setName("My cover"); // optional
-
-// //future use 
 
 void HAIntegration::onCoverCommand(HACover::CoverCommand cmd, HACover* sender) {
     // Log the received command
