@@ -14,23 +14,17 @@
 #define DIRECTION          22 //Physical is 27 and 29
 #define POWER              21
 
-#define INPUT1_PIN  10
-#define INPUT2_PIN  11
-#define OUTPUT1_PIN 26
-#define OUTPUT2_PIN 27
-
 WiFiClient client;
 HADevice device;
 HAMqtt mqtt(client, device);
 // HASwitch is an example of a HA device-type. You may need to initialize an instance of a different class for your device.
 // See .pio\libdeps\pico\home-assistant-integration\src\device-types
 HASwitch led("windowLED");
-HASwitch direction("Direction");
-HAButton power("Power");
+//HASwitch direction("Direction");
+//HAButton power("Power");
 
 HACover cover("Cover", HACover::PositionFeature);
-HANumber number("CalibratePosition");
-
+HANumber number("CalibratePosition", HANumber::PrecisionP1);
 
 
 void HAIntegration::configure() {
@@ -48,12 +42,6 @@ void HAIntegration::configure() {
     pinMode(POWER, OUTPUT);
     digitalWrite(POWER, LOW);  
 
-    //setup
-    pinMode(INPUT1_PIN, INPUT);
-    pinMode(INPUT2_PIN, INPUT);
-    pinMode(OUTPUT1_PIN, OUTPUT);
-    pinMode(OUTPUT2_PIN, OUTPUT);
-
     //Set device ID as MAC address
 
     byte mac[WL_MAC_ADDR_LENGTH];
@@ -68,10 +56,10 @@ void HAIntegration::configure() {
     led.onCommand(switchHandler);
     led.setName("Window LED"); // optional
 
-    power.onCommand(onButtonCommand);
-    power.setName("TOGGLE");
-    direction.onCommand(switchHandler);
-    direction.setName("Up/Down");
+    // power.onCommand(onButtonCommand);
+    // power.setName("TOGGLE");
+    // direction.onCommand(switchHandler);
+    // direction.setName("Up/Down");
 
     cover.onCommand(onCoverCommand);
     cover.setName("My cover"); // optional
@@ -93,26 +81,26 @@ void HAIntegration::configure() {
 }
 
 
-void HAIntegration::switchHandler(bool state, HASwitch* sender) {
-    if (sender == &led){
-    digitalWrite(LED_PIN, (state ? HIGH : LOW));
-    } else if (sender == &direction) {
-    digitalWrite(DIRECTION, (state ? HIGH : LOW));
-    }
-    sender->setState(state);  // report state back to Home Assistant
-}
+// void HAIntegration::switchHandler(bool state, HASwitch* sender) {
+//     if (sender == &led){
+//     digitalWrite(LED_PIN, (state ? HIGH : LOW));
+//     } else if (sender == &direction) {
+//     digitalWrite(DIRECTION, (state ? HIGH : LOW));
+//     }
+//     sender->setState(state);  // report state back to Home Assistant
+// }
 
-// might need to remove this.
-void HAIntegration::onButtonCommand(HAButton* sender) {
-    if (sender == &power) {
-        digitalWrite(LED_PIN, HIGH);
-        delay(1000);
-        digitalWrite(LED_PIN, LOW);
-    } else {
-        digitalWrite(POWER, LOW);
-    }
+// // might need to remove this.
+// void HAIntegration::onButtonCommand(HAButton* sender) {
+//     if (sender == &power) {
+//         digitalWrite(LED_PIN, HIGH);
+//         delay(1000);
+//         digitalWrite(LED_PIN, LOW);
+//     } else {
+//         digitalWrite(POWER, LOW);
+//     }
     
-}
+// }
 
 //Cover
 
@@ -165,6 +153,7 @@ void HAIntegration::onNumberCommand(HANumeric number, HANumber* sender)
 {
     if (!number.isSet()) {
         // the reset command was send by Home Assistant
+        
     } else {
         // you can do whatever you want with the number as follows:
         float numberFloat = number.toFloat(); 
