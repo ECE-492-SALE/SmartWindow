@@ -53,8 +53,8 @@ void HAIntegration::configure() {
     device.setSoftwareVersion("0.1");
 
     // handle switch state(s)
-    led.onCommand(switchHandler);
-    led.setName("Window LED"); // optional
+    //led.onCommand(switchHandler);
+    //led.setName("Window LED"); // optional
 
     // power.onCommand(onButtonCommand);
     // power.setName("TOGGLE");
@@ -115,14 +115,14 @@ void HAIntegration::onCoverCommand(HACover::CoverCommand cmd, HACover* sender) {
             commandStr = "Open";
             newState = HACover::StateOpening;
             
-            digitalWrite(DIRECTION, HIGH);
+            digitalWrite(DIRECTION, LOW);
             digitalWrite(POWER, HIGH);
             break;
 
         case HACover::CommandClose:
             commandStr = "Close";
             newState = HACover::StateClosing;
-            digitalWrite(DIRECTION, LOW);
+            digitalWrite(DIRECTION, HIGH);
             digitalWrite(POWER, HIGH);
             break;
 
